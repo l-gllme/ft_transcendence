@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int     @id @unique @default(autoincrement())
+  gamesWon     Int     @default(0)
+  gamesLost    Int     @default(0)
+  username     String? @unique
+  display_name String? @unique @default(uuid())
+  image        String? @default("https://picsum.photos/200/200")
+  friends      Int[]
+  connected    Int		@default(0)
+  blocked      Int[]
+  currentRoom  Int?
+
+  messages Message[] @relation("author")
+  rooms    Room[]    @relation("joined")
+  games    Game[]    @relation("games")
+
+  twoFASecret  String?
+  twoFAEnabled Boolean @default(false)
+  twoFAlogin   Boolean @default(false)
+}
+
+model Room {
+  id       Int       @id @default(autoincrement())
+  name     String
+  private  Boolean   @default(false)
+  password String?
+  owner    Int
+  admin    Int[]
+  banned   Int[]
+  muted    Int[]
+  messages Message[]
+  users    User[]    @relation("joined")
+}
+
+model Message {
+  id         Int      @id @default(autoincrement())
+  content    String
+  createdAt  DateTime @default(now())
+  author     User?    @relation("author", fields: [authorName], references: [display_name])
+  authorName String
+  authorId   Int
+
+  room   Room?   @relation(fields: [roomId], references: [id])
+  roomId Int?
+  invite Boolean @default(false)
+}
+
+model Game {
+  id         Int      @id @default(autoincrement())
+  startTime  DateTime @default(now())
+  user1Id    Int?
+  user2Id    Int?
+  user1Score Int?
+  user2Score Int?
+  users      User[]   @relation("games")
+}

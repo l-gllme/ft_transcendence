@@ -1,0 +1,51 @@
+{
+	"name": "backend",
+	"version": "1.0.0",
+	"main": "dist/main.js",
+	"scripts": {
+		"start": "nest start",
+		"start:dev": "nest start --watch",
+		"start:prod": "node dist/main",
+		"build": "nest build",
+		"prisma:generate": "prisma generate",
+		"prisma:deploy": "prisma migrate deploy",
+		"prisma:dev": "prisma migrate dev --name init",
+		"prisma:start": "npm run prisma:generate && npm run prisma:deploy && npm run prisma:dev",
+		"prisma:studio": "prisma studio"
+	},
+	"dependencies": {
+		"@nestjs/common": "10.1.3",
+		"@nestjs/core": "10.1.3",
+		"@nestjs/jwt": "^10.1.1",
+		"@nestjs/passport": "^10.0.2",
+		"@nestjs/platform-express": "10.1.3",
+		"@nestjs/platform-socket.io": "^10.2.4",
+		"@nestjs/websockets": "^10.2.4",
+		"@prisma/client": "^5.2.0",
+		"bcrypt": "^5.1.1",
+		"cookie-parser": "^1.4.6",
+		"decode": "^0.3.0",
+		"express": "^4.18.2",
+		"hi-base32": "^0.5.1",
+		"multer": "^1.4.5-lts.1",
+		"otplib": "^12.0.1",
+		"passport": "^0.6.0",
+		"passport-42": "^1.2.6",
+		"passport-google-oauth20": "^2.0.0",
+		"passport-jwt": "^4.0.1",
+		"passport-totp": "^0.0.2",
+		"qrcode": "^1.5.3",
+		"speakeasy": "^2.0.0"
+	},
+	"devDependencies": {
+		"@nestjs/cli": "10.1.11",
+		"@types/bcrypt": "^5.0.0",
+		"@types/multer": "^1.4.8",
+		"@types/passport": "^1.0.13",
+		"@types/passport-google-oauth20": "^2.0.12",
+		"@types/passport-jwt": "^3.0.10",
+		"@types/passport-local": "^1.0.36",
+		"@types/qrcode": "^1.5.4",
+		"prisma": "^5.2.0"
+	}
+}

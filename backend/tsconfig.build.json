@@ -1,0 +1,14 @@
+{
+	"extends": "./tsconfig.json",
+	"compileOptions": {
+	  "outDir": "./dist",
+	  "tsBuildInfoFile": "./dist/tsconfig.buildinfo"
+	},
+	"include": [
+		"src/**/*.ts",
+		"./ormconfig.ts",
+		"./main.ts"
+	  ],
+	"exclude": ["node_modules"]
+  }
+  
